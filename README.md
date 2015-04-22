@@ -1,8 +1,6 @@
 # Osrmclient
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/osrmclient`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ruby interface to query Open Source Routing Machine servers.
 
 ## Installation
 
@@ -21,8 +19,29 @@ Or install it yourself as:
     $ gem install osrmclient
 
 ## Usage
+```ruby
+  client = Osrmclient.new(server: 'http://router.project-osrm.org')
 
-TODO: Write usage instructions here
+  puts "'locate' example:"
+  response = client.locate(lat:37.9113, lon:58.3771)
+  puts "Response: #{response.body}"
+  puts "----------------------------------"
+
+  puts "'nearest' example:"
+  response = client.nearest(lat:37.9113, lon:58.3771)
+  puts "Response: #{response.body}"
+  puts "----------------------------------"
+
+  response = client.viaroute(lat1:37.8954, lon1:58.3640, lat2:37.8968, lon2:58.3619, z: 18, geometry: true)
+  puts "Response: #{response.body}"
+  puts "----------------------------------"
+
+  puts "'table' example:"
+  response = client.table(locations:{lat1:52.554070, lon1:13.160621, lat2:52.431272, lon2:13.720654, lat3:52.554070, lon3:13.720654, lat4:52.554070, lon4:13.160621}, z:18)
+  puts "Response: #{response.body}"
+  puts "----------------------------------"
+```
+
 
 ## Development
 
